@@ -31,7 +31,7 @@ $content = '<div class="row-fluid decision-view">';
 $content .= '<div class="span6">' . elgg_view_entity($decision, array('full_view' => true)) . elgg_view_comments($decision) . '</div>';
 
 $end_clarification = ($decision->time_created + $decision->clarification * 60 * 60 * 24) * 1000;
-$heading = '<div class="elgg-heading-basic pam"><h3>' . elgg_echo('decision:clarification:time_left') . '</h3><div class="countdown ptm mts" data-end_clarification="'. $end_clarification .'"></div></div>';
+$heading = '<div class="elgg-heading-basic pam"><h3>' . elgg_echo('decision:clarification:time_left') . '</h3><div class="countdown ptm mts" data-end_clarification="'. $end_clarification .'" data-delta="'. $decision->delta .'"></div></div>';
 $heading .= '<div class="pam mtm">' . elgg_echo('decision:clarification:description') . '</div>';
 $heading .= '<div class="pam">' . elgg_view('output/url', array(
 	'href' => '#',

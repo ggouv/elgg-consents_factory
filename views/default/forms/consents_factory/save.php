@@ -13,6 +13,7 @@ $container_guid = elgg_extract('container_guid', $vars);
 $guid = elgg_extract('guid', $vars, null);
 $clarification = elgg_extract('clarification', $vars, null);
 $objection = elgg_extract('objection', $vars, null);
+$delta = elgg_extract('delta', $vars, null);
 
 ?>
 <div>
@@ -34,6 +35,10 @@ $objection = elgg_extract('objection', $vars, null);
 <div>
 	<label><?php echo elgg_echo('decision:time:objection'); ?></label>
 	<?php echo elgg_view('input/text', array('name' => 'objection', 'value' => $objection)); ?>
+</div>
+<div>
+	<label><?php echo elgg_echo('decision:time:delta'); ?></label>
+	<?php echo elgg_view('input/text', array('name' => 'delta', 'value' => $delta)); ?>
 </div>
 <?php
 

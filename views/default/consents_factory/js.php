@@ -2,16 +2,18 @@
 elgg.provide('elgg.decision');
 
 elgg.decision.init = function() {
-	if ($('.countdown').length) {
-		$('.countdown').countdown({
-			date: $('.countdown').data('end_clarification')
+	var $cd = $('.countdown');
+
+	if ($cd.length) {
+		$cd.countdown({
+			date: $cd.data('end_clarification')
 		});
 
 		$('.decision-time-less').click(function() {
-			$('.countdown').data('countdown').visualUpdate($('.countdown').data('end_clarification')-3600000);
+			$cd.data('countdown').visualUpdate($cd.data('end_clarification')-($cd.data('delta')*3600000));
 		});
 		$('.decision-time-more').click(function() {
-			$('.countdown').data('countdown').visualUpdate($('.countdown').data('end_clarification')+3600000);
+			$cd.data('countdown').visualUpdate($cd.data('end_clarification')+($cd.data('delta')*3600000));
 		});
 	}
 };

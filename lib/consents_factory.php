@@ -23,6 +23,7 @@ function decision_prepare_form_vars($decision = null) {
 		'entity' => $decision,
 		'clarification' => '7',
 		'objection' => '7',
+		'delta' => '1',
 	);
 
 	if ($decision) {
