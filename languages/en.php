@@ -55,6 +55,19 @@ $english = array(
 	'sec' => "seconde",
 	'secs' => "secondes",
 
+	/**
+	 * Forms
+	 */
+	'decision:time:clarification' => "Delay of clarification (in day)",
+	'decision:time:objection' => "Delay of objection (in day)",
+	'decision:time:delta' => "Time to remove for clarification rate (in hour)",
+
+	'decision:button:time:less' => "It's clear&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+	'decision:desc:time:less' => "and <strong>I remove %s hour%s</strong> to accelerate decision process.",
+	'decision:button:time:egual' => "It's clear&nbsp;&nbsp;",
+	'decision:desc:time:egual' => "and I let's other the time to make their choices.",
+	'decision:button:time:more' => "It's not clear",
+	'decision:desc:time:more' => "and <strong>I add %s hour%s</strong> to get more time to clarify this decision.",
 
 	/**
 	 * Widget
@@ -66,6 +79,7 @@ $english = array(
 	 */
 
 	'decision:save:success' => "Your item was successfully created.",
+	'decision:modify:success' => "Your item was successfully modified.",
 	'decision:delete:success' => "Your decision was deleted.",
 
 	/**

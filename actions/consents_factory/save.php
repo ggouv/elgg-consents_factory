@@ -50,11 +50,12 @@ if ($decision->save()) {
 
 	elgg_clear_sticky_form('decision');
 
-	system_message(elgg_echo('decision:save:success'));
-
 	//add to river only if new
 	if ($new) {
 		add_to_river('river/object/decision/create','create', elgg_get_logged_in_user_guid(), $decision->getGUID());
+		system_message(elgg_echo('decision:save:success'));
+	} else {
+		system_message(elgg_echo('decision:modify:success'));
 	}
 
 	forward($decision->getURL());
