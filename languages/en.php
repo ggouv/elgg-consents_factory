@@ -88,6 +88,7 @@ $english = array(
 
 	'decision:save:failed' => "Your decision could not be saved. Make sure you've entered a title and description and then try again.",
 	'decision:delete:failed' => "Your decision could not be deleted. Please try again.",
+	'decision:clarification:vote:error' => "Your vote cannot be saved.",
 );
 
 add_translation('en', $english);

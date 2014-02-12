@@ -27,34 +27,36 @@ $title = $decision->title;
 elgg_push_breadcrumb($title);
 
 
-$content = '<div class="row-fluid decision-view">';
+$content = '<div class="row-fluid decision-view" data-guid="' . $decision->getGUID() . '">';
 $content .= '<div class="span6">' . elgg_view_entity($decision, array('full_view' => true)) . elgg_view_comments($decision) . '</div>';
 
-$end_clarification = ($decision->time_created + $decision->clarification * 60 * 60 * 24) * 1000;
+$end_clarification = decision_get_end_clarification($decision) * 1000;
 $delta = $decision->delta;
+$user_vote = decision_get_user_clarification_vote($guid, $user_guid);
+
 $time_left = elgg_echo('decision:clarification:time_left');
 $desc = elgg_echo('decision:clarification:description');
 $btn_less = elgg_view('output/url', array(
 	'href' => '#',
 	'text' => elgg_echo('decision:button:time:less'),
-	'class' => 'elgg-button elgg-button-action decision-time-less pvs prm gwfb'
+	'class' => 'elgg-button elgg-button-action decision-time-less pvs prm gwfb' . ($user_vote->value == 'less' ? ' choosed' : '')
 )) . '<span class="pas float">' . elgg_echo('decision:desc:time:less', array($delta, $delta>1?'s':'')) . '</span>';
 $btn_egual = elgg_view('output/url', array(
 	'href' => '#',
 	'text' => elgg_echo('decision:button:time:egual'),
-	'class' => 'elgg-button elgg-button-action decision-time-egual pvs phm gwfb'
+	'class' => 'elgg-button elgg-button-action decision-time-egual pvs phm gwfb' . ($user_vote->value == 'egual' ? ' choosed' : '')
 )) . '<span class="pas float">' . elgg_echo('decision:desc:time:egual', array($delta, $delta>1?'s':'')) . '</span>';
 $btn_more = elgg_view('output/url', array(
 	'href' => '#',
 	'text' => elgg_echo('decision:button:time:more'),
-	'class' => 'elgg-button elgg-button-action decision-time-more pvs prm gwfb'
+	'class' => 'elgg-button elgg-button-action decision-time-more pvs prm gwfb' . ($user_vote->value == 'more' ? ' choosed' : '')
 )) . '<span class="pas float">' . elgg_echo('decision:desc:time:more', array($delta, $delta>1?'s':'')) . '</span>';
 
 $content .= <<<HTML
 <div class="span6">
 	<div class="elgg-heading-basic pam">
 		<h3>$time_left</h3>
-		<div class="countdown ptm mts" data-end_clarification="{$end_clarification}" data-delta="{$delta}"></div>
+		<div class="countdown ptm mts" data-end_clarification="{$end_clarification}"></div>
 	</div>
 	<div class="pam mtm">{$desc}</div>
 	<ul class="clarification-buttons mtm">

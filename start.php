@@ -19,7 +19,7 @@ function consents_factory() {
 	$action_path = "$root/actions/consents_factory";
 	elgg_register_action('consents_factory/save', "$action_path/save.php");
 	elgg_register_action('consents_factory/delete', "$action_path/delete.php");
-	elgg_register_action('consents_factory/share', "$action_path/share.php");
+	elgg_register_action('consents_factory/vote_clarification', "$action_path/vote_clarification.php");
 
 	// menus
 	elgg_register_menu_item('site', array(
@@ -70,13 +70,14 @@ function consents_factory() {
  */
 function consents_factory_page_handler($page) {
 
-	elgg_load_library('elgg:consents_factory');
 
 	if (!isset($page[0])) {
 		$page[0] = 'all';
 	}
 
+	elgg_load_library('elgg:consents_factory');
 	elgg_push_breadcrumb(elgg_echo('decision'), 'decision/all');
+	elgg_push_context('consents_factory');
 
 	$pages = dirname(__FILE__) . '/pages/consents_factory';
 

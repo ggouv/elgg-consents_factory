@@ -5,15 +5,29 @@ elgg.decision.init = function() {
 	var $cd = $('.countdown');
 
 	if ($cd.length) {
+		var $cba = $('.clarification-buttons a');
+
 		$cd.countdown({
 			date: $cd.data('end_clarification')
 		});
 
-		$('.decision-time-less').click(function() {
-			$cd.data('countdown').visualUpdate($cd.data('end_clarification')-($cd.data('delta')*3600000));
-		});
-		$('.decision-time-more').click(function() {
-			$cd.data('countdown').visualUpdate($cd.data('end_clarification')+($cd.data('delta')*3600000));
+		$cba.click(function() {
+			var $this = $(this),
+				vote_type = $this.attr('class').match(/decision-time-(\S*)/)[1];
+
+			elgg.action('consents_factory/vote_clarification', {
+				data: {
+					guid: $this.closest('.decision-view').data('guid'),
+					vote_type: vote_type
+				},
+				success: function(response) {
+					$cd.data('countdown').visualUpdate(response.output.end_clarification*1000);
+					$cba.removeClass('choosed').filter('.decision-time-'+response.output.vote_type).addClass('choosed');
+				},
+				error: function() {
+					elgg.register_error(elgg.echo('decision:clarification:vote:error'));
+				}
+			});
 		});
 	}
 };
@@ -112,7 +126,7 @@ and GPL-3.0 (http://opensource.org/licenses/GPL-3.0) licenses.
 				if (_this.interval) clearInterval(_this.interval);
 
 				options = $.extend({}, {
-					speed: 2000,  // how long it should take to count between the target numbers
+					speed: 1200,  // how long it should take to count between the target numbers
 					refreshInterval: 90  // how often the element should be updated
 				}, options || {});
 
